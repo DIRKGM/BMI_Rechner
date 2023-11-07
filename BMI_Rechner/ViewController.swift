@@ -24,7 +24,20 @@ class ViewController: UIViewController {
 
     @IBAction func clickHereButton_Tapped(_ sender: Any) {
     }
+ 
+    func calculateBMI (){
+        
+    }
     
+    // Funktion prüft ob es Veränderungen im Textfield gibt
+    func addTargetToTextField(){
+        nameTextField.addTarget(self, action: #selector(textFieldChanged), for: UIControl.Event.editingChanged)
+        sizeTextField.addTarget(self, action: #selector(textFieldChanged), for: UIControl.Event.editingChanged)
+        weightTextField.addTarget(self, action: #selector(textFieldChanged), for: UIControl.Event.editingChanged)
+    }
     
+    @objc func textFieldChanged(){
+        
+    }
 }
-
+ 
