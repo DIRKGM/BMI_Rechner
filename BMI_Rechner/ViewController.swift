@@ -45,13 +45,13 @@ class ViewController: UIViewController {
         var message = ""
         
         if value <= 20 {
-            message = "Du hast Untergewicht"
+            message = "Du hast Untergewicht. Dein BMI beträgt \(value)"
         } else if value >= 20 && value <= 25 {
-            message = "Du hast Normalgewicht"
+            message = "Du hast Normalgewicht. Dein BMI beträgt \(value)"
         } else if value >= 25 && value <= 30 {
-            message = "Du hast Übergewicht"
+            message = "Du hast Übergewicht. Dein BMI beträgt \(value)"
         } else {
-            message = "Du hast Übergewicht"
+            message = "Du hast Übergewicht. Dein BMI beträgt \(value)"
         }
         erstelleAnzeige(message: message)
     }
@@ -72,12 +72,28 @@ class ViewController: UIViewController {
         weightTextField.addTarget(self, action: #selector(textFieldChanged), for: UIControl.Event.editingChanged)
         
         nameTextField.addTarget(self, action: #selector(nameTextFieldChange), for: UIControl.Event.editingDidEnd)
+        
+        sizeTextField.addTarget(self, action: #selector(sizeTextFieldChange), for: UIControl.Event.editingDidEnd
+        )
     }
     
     @objc func nameTextFieldChange (){
             let name = nameTextField.text!
             nameTextField.text = name.capitalizingFirstLetter()
         }
+    
+    @objc func sizeTextFieldChange (){
+        let sizeAsString = sizeTextField.text!
+        let characterset = CharacterSet(charactersIn: ".,")
+        
+        if sizeAsString.rangeOfCharacter(from: characterset) != nil {
+            let sizeAsDouble = Double(sizeAsString)!
+            sizeTextField.text = "\(Int(sizeAsDouble * 100.0))"
+        } else if !(sizeTextField.text!.isEmpty) {
+            let sizeAsCM = Double(sizeTextField.text!)!
+            sizeTextField.text = "\(sizeAsCM / 100)"
+        }
+    }
     
     //MARK: -prüft ob Text vorhanden und macht Button klickbar
     @objc func textFieldChanged(){
